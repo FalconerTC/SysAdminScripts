@@ -8,6 +8,8 @@ config['Common'] = {'home_dir': '/home/spig',
                     'scripts_dir': '${home_dir}/scripts',
                     'settings_dir': '${scripts_dir}/settings',
                     'log_dir': '${home_dir}/log'}
+config['Execs'] = {'control': '${scripts_dir}/control.py',
+                   'steam_cmd': '${home_dir}/games/steamCMD/steamcmd.sh'}
 config['Starbound'] = {'game_dir': '${Common:servers_dir}/starbound',
                        'game_path': '${game_dir}/linux',
                        'game_id': 211820,
