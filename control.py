@@ -121,6 +121,8 @@ function = args.function
 config = ConfigParser(interpolation=ExtendedInterpolation())
 config.read('./settings/config.cfg')
 
+print("Server value: " + server)
+print("Function value: " + function)
 print("This is where the conditionals begin.")
 if server:
     if function is 'start':
