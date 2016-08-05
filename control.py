@@ -111,10 +111,9 @@ parser = argparse.ArgumentParser(prog="Server control program", description="Thi
                                  "available on this server.")
 
 
-parser.add_argument('server', choices=['killingfloor', 'starbound'], help="Which server program to run", required=False)
+parser.add_argument('server', choices=['killingfloor', 'starbound'], help="Which server program to run")
 parser.add_argument('function', choices=['start', 'stop', 'restart', 'status', 'update'], help="What function to "
-                    "perform with specified server.",
-                    required=False)
+                    "perform with specified server.")
 args = parser.parse_args()
 server = args.server
 function = args.function
