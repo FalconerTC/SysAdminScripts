@@ -1,0 +1,29 @@
+#!/bin/bash
+# This script starts services
+# This script runs every time the server restarts
+# TODO build a service manager
+
+source /etc/bash.bashrc
+
+# Vars
+BASE_DIR="/home/spig"
+TS3_DIR=$BASE_DIR"/TS3Server"
+
+# Start ts3 server
+sudo $TS3_DIR"/ts3server_startscript.sh" stop
+sudo $TS3_DIR"/ts3server_startscript.sh" start
+
+# Start Minecraft server
+#pushd /home/spig/Minecraft/Servers/YogscastCompletePack_2931RRYOGS
+#./MinecraftStartServer.sh
+#popd
+
+echo $CONTROL
+SERVICES=("starbound")
+for SERVICE in ${SERVICES[@]}; do
+    echo "eval $CONTROL $SERVICE start"
+    eval $CONTROL $SERVICE start   
+done
+
+
+#/home/spig/scripts/scriptWrapper starboundRestarter & 

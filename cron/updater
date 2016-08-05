@@ -1,0 +1,35 @@
+#!/bin/bash
+# This script installs updates and informs special services
+
+if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run as root"
+    exit 1
+fi
+
+# Vars
+BASE_DIR="/home/spig/"
+TS3_DIR=$BASE_DIR"TS3Server/"
+
+# Update
+echo -e "Fetching updates..."
+apt-get -qq update 
+echo -e "Installing updates\n"
+apt-get -yu upgrade
+echo -e "Running TS3 notifier\n"
+
+# Notify services
+echo -e "Notifying teamspeak3 server..."
+#eval $BASE_DIR"scripts/ts3Notifier" 60 10 5 & >> /dev/null
+eval $BASE_DIR"scripts/ts3.py" 60 10 5 & >> /dev/null
+#$USRDIR/scripts/MinecraftScript.sh restart
+
+# Wait
+echo -e "Sleeping 60 seconds..."
+sleep 60
+
+# Restart
+echo "Shutting down"
+eval $TS3_DIR/ts3server_startscript.sh stop &
+wait
+echo "Update complete"
+sudo reboot

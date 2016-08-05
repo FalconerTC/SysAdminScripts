@@ -1,0 +1,40 @@
+#!/usr/bin/expect
+
+# Read in times from argv
+proc parseArgv { {T[0] "5"} {T[1] "0"} {T[2] "0"}} {
+    variable ::TIME1 ${T[0]}
+    variable ::TIME2 ${T[1]}
+    variable ::TIME3 ${T[2]}
+}
+parseArgv {*}$argv
+set USERNAME "PROMETHEUS"
+set VALID_RESP "error id=0 msg=ok"
+
+# Login
+spawn telnet 107.170.255.155 10011
+expect "specific command."
+send "login serveradmin password\r"
+expect $VALID_RESP
+
+# Initialization
+send "use 1\r"
+expect $VALID_RESP
+send "clientupdate client_nickname=$USERNAME\r"
+expect $VALID_RESP
+
+# Send messages
+set MESSAGE "The\\sserver\\swill\\sbe\\srestarting\\sin\\s$TIME1\\sseconds."
+send "sendtextmessage targetmode=3 msg=$MESSAGE\r"
+expect $VALID_RESP
+sleep [expr $TIME1-$TIME2]
+
+set MESSAGE "The\\sserver\\swill\\sbe\\srestarting\\sin\\s$TIME2\\sseconds."
+send "sendtextmessage targetmode=3 msg=$MESSAGE\r"
+expect $VALID_RESP
+sleep [expr $TIME2-$TIME3]
+
+set MESSAGE "The\\sserver\\swill\\sbe\\srestarting\\sin\\s$TIME3\\sseconds."
+send "sendtextmessage targetmode=3 msg=$MESSAGE\r"
+expect $VALID_RESP
+
+send "quit\r"

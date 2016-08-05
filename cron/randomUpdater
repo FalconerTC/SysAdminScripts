@@ -1,0 +1,7 @@
+#!/bin/bash
+# Runs the specified script at a random hour every day
+# Shamelessly taken from http://stackoverflow.com/questions/16873713
+
+script="/bin/scriptWrapper $1"
+mins=$(( $RANDOM % 24 * 60))
+echo $script | at now+${mins}min

@@ -1,0 +1,13 @@
+# ~/.allrc: General settings for all services
+
+# Directories
+export HOME_DIR="/home/spig"
+export SERVERS_DIR="$HOME_DIR/servers"
+export SCRIPTS_DIR="$HOME_DIR/scripts"
+export SETTINGS_DIR="$SCRIPTS_DIR/settings"
+export LOG_DIR="$HOME_DIR/log"
+
+# Executables
+export CONTROL="$SCRIPTS_DIR/control.sh"
+export STEAMCMD="$HOME_DIR/games/steamCMD/steamcmd.sh"
+

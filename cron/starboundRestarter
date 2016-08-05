@@ -1,0 +1,13 @@
+#!/bin/bash
+# Starbound server restarting script
+
+while [ 1 ]; do
+    /home/spig/scripts/control.sh starbound status &> /dev/null
+    if [ $? = 1 ]; then       
+        echo "$(date +%X), Restarting Starbound server." 
+       /home/spig/scripts/control.sh starbound restart &> /dev/null
+    else
+        echo "$(date +%X), Starbound still running."
+    fi
+    sleep 5
+done

@@ -1,0 +1,38 @@
+#!/bin/bash
+# A wrapper for running scripts in ~/scripts/cron 
+# and logging to ~/log
+
+# Vars
+source /home/spig/scripts/settings/.allrc
+BASE_DIR="/home/spig/"
+LOG_DIR=$BASE_DIR"log/$1/$(date +%m)/$(date +%d)/"
+SCRIPTS_DIR=$BASE_DIR"scripts/cron/"
+
+# Parse args
+if [ "$#" -lt 1 ]; then
+    echo "Usage: Scriptwrapper [script]"
+    echo "Known scripts: "
+    for file in $(ls $SCRIPTS_DIR); do
+        echo -e "\t$file"   
+    done
+    exit 0
+fi
+
+SCRIPT=$1
+shift
+
+# Setup logging
+mkdir -p $LOG_DIR
+log=$LOG_DIR"$(date +%H:%M:%S)"
+
+# Validate and execute
+files=$(ls $SCRIPTS_DIR)
+for file in $files; do
+    if [ "$SCRIPT" == "$file" ]; then
+	eval "$SCRIPTS_DIR/$SCRIPT" $@ &>$log
+	exit 0
+    fi
+done
+
+echo "error: $SCRIPT is not a recognized script"
+exit 1

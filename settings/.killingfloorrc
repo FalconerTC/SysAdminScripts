@@ -1,0 +1,9 @@
+# .killingfloorrc: Settings for dedicated Killing Floor server
+
+GAME_DIR="$SERVERS_DIR/killingfloor"
+GAME_PATH="$GAME_DIR/System"
+GAME_ID=215360
+SCREEN_NAME="KillingFloor_Server"
+START_FLAGS="KF-farm.rom?VACSecured=true?AdminName=spig?AdminPassword=nyanpasu"
+START_CMD="$GAME_PATH/ucc-bin server $START_FLAGS -ini=Killingfloor.ini -nohomedir"
+STEAM_USERNAME="spig_server"

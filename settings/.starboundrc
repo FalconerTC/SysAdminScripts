@@ -1,0 +1,8 @@
+# .starboundrc: Settings for dedicated Starbound server
+
+GAME_DIR="$SERVERS_DIR/starbound"
+GAME_PATH="$GAME_DIR/linux"
+GAME_ID=211820
+SCREEN_NAME="Starbound_Server"
+START_CMD="$GAME_PATH/starbound_server"
+STEAM_USERNAME="spider_pig448"
