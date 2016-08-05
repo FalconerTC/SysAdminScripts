@@ -42,11 +42,14 @@ def start(which):
         game_path = config['KillingFloor']['game_path']
     print("Attempting to start server...")
     pid = get_pid(which)
-    if pid:
+    if pid and (pid != 'ERROR'):
         print("Server already running.")
         return_code = 0
+    elif pid == 'ERROR':
+        print("Err: PID not retrieved.")
+        return_code = 1
     else:
-        start_call = run(['screen -A -m -d -S ' + screen_name + ' ' + start_cmd], cwd=game_path, shell=True)
+        start_call = run(['screen', '-A', '-m', '-d', '-S', screen_name, start_cmd], cwd=game_path)
         return_code = start_call.returncode
         print("\nServer running in detached screen.")
         print("Screen name: " + screen_name)
