@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.5
 """Control script for starting and maintaining servers."""
-from subprocess import run, check_output
+from subprocess import run, check_output, CalledProcessError
 import argparse
 from configparser import ConfigParser, ExtendedInterpolation
 from time import sleep
@@ -19,9 +19,13 @@ def get_pid(which):
     # run(['ps fax | grep ' + screen_name + ' | grep SCREEN | awk \'{ print $1 } \''], shell=True)
     # This returns, as a byte string, the PID of the process that has a command line section matching the screen_name.
     # It essentially mimics the functionality of the above line but I'm not sure if it should be removed yet.
-    pid = check_output(['pgrep', '-f', screen_name]).decode("utf-8").strip()  # decodes PID from byte string to string
-    return pid
-
+    try:
+        pid = check_output(['pgrep', '-f', screen_name]).decode("utf-8").strip()
+        # decodes PID from byte string to string
+        return pid
+    except CalledProcessError:
+        print("Could not find PID. Is the service running?")
+        return 'A'
 
 # Start service
 def start(which):
