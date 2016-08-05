@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.5
 """Control script for starting and maintaining servers."""
-from subprocess import run
+from subprocess import run, check_output
 import argparse
 from configparser import ConfigParser, ExtendedInterpolation
 from time import sleep
@@ -16,7 +16,10 @@ def get_pid(which):
         screen_name = config['Starbound']['screen_name']
     elif which == 'killingfloor':
         screen_name = config['KillingFloor']['screen_name']
-    pid = run(['ps fax | grep ' + screen_name + ' | grep SCREEN | awk \'{ print $1 } \''], shell=True)
+    run(['ps fax | grep ' + screen_name + ' | grep SCREEN | awk \'{ print $1 } \''], shell=True)
+    # This returns, as a byte string, the PID of SCREEN. It essentially mimics the functionality of the above line
+    # but I'm not sure if it should be removed yet.
+    pid = check_output(['pidof', 'SCREEN'])
     return pid
 
 
@@ -79,7 +82,7 @@ def status(which):
     pid = get_pid(which)
     if pid:
         print("Server running.")
-        print("PID: " + pid)
+        print("PID: " + str(pid))
         return_code = 0
     else:
         print("Server not running.")
