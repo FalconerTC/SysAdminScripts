@@ -24,5 +24,5 @@ config['KillingFloor'] = {'game_dir': '${Common:servers_dir}/killingfloor',
                           'start_cmd': '${game_path}/ucc-bin server ${start_flags} -ini=Killingfloor.ini -nohomedir',
                           'steam_username': 'spig_server'}
 
-with open('config.cfg', 'w') as configfile:
+with open('./settings/config.cfg', 'w') as configfile:
     config.write(configfile)
