@@ -11,6 +11,7 @@ __authors__ = 'spig', 'knytemere'
 # Function declarations
 # Get PID of requested service
 def get_pid(which):
+    pid = ''
     screen_name = ''
     if which == 'starbound':
         screen_name = config['Starbound']['screen_name']
@@ -22,10 +23,10 @@ def get_pid(which):
     try:
         pid = check_output(['pgrep', '-f', screen_name]).decode("utf-8").strip()
         # decodes PID from byte string to string
-        return pid
     except CalledProcessError:
         print("Could not find PID. Is the service running?")
-        return 'ERROR'
+    return pid
+
 
 # Start service
 def start(which):
@@ -42,12 +43,9 @@ def start(which):
         game_path = config['KillingFloor']['game_path']
     print("Attempting to start server...")
     pid = get_pid(which)
-    if pid and (pid != 'ERROR'):
+    if pid:
         print("Server already running.")
         return_code = 0
-    elif pid == 'ERROR':
-        print("Err: PID not retrieved.")
-        return_code = 1
     else:
         start_call = run(['screen', '-A', '-m', '-d', '-S', screen_name, start_cmd], cwd=game_path)
         return_code = start_call.returncode
