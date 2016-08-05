@@ -1,0 +1,6 @@
+# General
+*.swo
+*.swp
+
+# Python
+*.pyc
