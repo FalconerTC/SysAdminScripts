@@ -134,6 +134,6 @@ if server:
     elif function is 'update':
         update(server)
     else:
-        print("Incorrect function call. Please use control.py -h for usage information.")
+        print("Incorrect call to script. Please use control.py -h for usage information.")
 else:
-    print("Incorrect function call. Please use control.py -h for usage information.")
+    print("Incorrect call to script. Please use control.py -h for usage information.")
