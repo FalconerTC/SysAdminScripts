@@ -17,9 +17,9 @@ def get_pid(which):
     elif which == 'killingfloor':
         screen_name = config['KillingFloor']['screen_name']
     # run(['ps fax | grep ' + screen_name + ' | grep SCREEN | awk \'{ print $1 } \''], shell=True)
-    # This returns, as a byte string, the PID of SCREEN. It essentially mimics the functionality of the above line
-    # but I'm not sure if it should be removed yet.
-    pid = check_output(['pidof', 'SCREEN']).decode("utf-8")  # decodes PID from byte string to string
+    # This returns, as a byte string, the PID of the process that has a command line section matching the screen_name.
+    # It essentially mimics the functionality of the above line but I'm not sure if it should be removed yet.
+    pid = check_output(['pgrep', '-f', screen_name]).decode("utf-8").strip()  # decodes PID from byte string to string
     return pid
 
 
