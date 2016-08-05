@@ -25,7 +25,7 @@ def get_pid(which):
         return pid
     except CalledProcessError:
         print("Could not find PID. Is the service running?")
-        return 'A'
+        return 'ERROR'
 
 # Start service
 def start(which):
@@ -48,8 +48,8 @@ def start(which):
     else:
         start_call = run(['screen -A -m -d -S ' + screen_name + ' ' + start_cmd], cwd=game_path, shell=True)
         return_code = start_call.returncode
-    print("\nServer running in detached screen.")
-    print("Screen name: " + screen_name)
+        print("\nServer running in detached screen.")
+        print("Screen name: " + screen_name)
     return return_code
 
 
