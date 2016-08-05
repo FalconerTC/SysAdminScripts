@@ -12,9 +12,9 @@ __authors__ = 'spig', 'knytemere'
 # Get PID of requested service
 def get_pid(which):
     screen_name = ''
-    if which is 'starbound':
+    if which == 'starbound':
         screen_name = config['Starbound']['screen_name']
-    elif which is 'killingfloor':
+    elif which == 'killingfloor':
         screen_name = config['KillingFloor']['screen_name']
     pid = run(['ps fax | grep ' + screen_name + ' | grep SCREEN | awk \'{ print $1 } \''], shell=True)
     return pid
@@ -25,11 +25,11 @@ def start(which):
     screen_name = ''
     start_cmd = ''
     game_path = ''
-    if which is 'starbound':
+    if which == 'starbound':
         screen_name = config['Starbound']['screen_name']
         start_cmd = config['Starbound']['start_cmd']
         game_path = config['Starbound']['game_path']
-    elif which is 'killingfloor':
+    elif which == 'killingfloor':
         screen_name = config['KillingFloor']['screen_name']
         start_cmd = config['KillingFloor']['start_cmd']
         game_path = config['KillingFloor']['game_path']
@@ -49,9 +49,9 @@ def start(which):
 # Stop service
 def stop(which):
     screen_name = ''
-    if which is 'starbound':
+    if which == 'starbound':
         screen_name = config['Starbound']['screen_name']
-    elif which is 'killingfloor':
+    elif which == 'killingfloor':
         screen_name = config['KillingFloor']['screen_name']
     pid = get_pid(which)
     if pid:
@@ -92,11 +92,11 @@ def update(which):
     steam_username = ''
     game_dir = ''
     game_id = ''
-    if which is 'starbound':
+    if which == 'starbound':
         steam_username = config['Starbound']['steam_username']
         game_dir = config['Starbound']['game_dir']
         game_id = config['Starbound']['game_id']
-    elif which is 'killingfloor':
+    elif which == 'killingfloor':
         steam_username = config['KillingFloor']['steam_username']
         game_dir = config['KillingFloor']['game_dir']
         game_id = config['KillingFloor']['game_id']
@@ -125,19 +125,19 @@ print("Server value: " + server)
 print("Function value: " + function)
 print("This is where the conditionals begin.")
 if server:
-    if function is 'start':
+    if function == 'start':
         print("Start call begins.")
         start(server)
-    elif function is 'stop':
+    elif function == 'stop':
         print("Stop call begins.")
         stop(server)
-    elif function is 'restart':
+    elif function == 'restart':
         print("Restart call begins.")
         restart(server)
-    elif function is 'status':
+    elif function == 'status':
         print("Status call begins.")
         status(server)
-    elif function is 'update':
+    elif function == 'update':
         print("Update call begins.")
         update(server)
 print("This is where the conditionals end.")
