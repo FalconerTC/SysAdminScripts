@@ -101,8 +101,8 @@ def update(which):
         game_dir = config['KillingFloor']['game_dir']
         game_id = config['KillingFloor']['game_id']
     print("Running updater...")
-    start_call = run([config['Execs']['steam_cmd'] + '+login ' + steam_username + ' +force_install_dir ' + game_dir
-                       + ' +app_update ' + game_id + ' validate +quit'], shell=True)
+    start_call = run([config['Execs']['steam_cmd'] + '+login ' + steam_username + ' +force_install_dir ' + game_dir +
+                      ' +app_update ' + game_id + ' validate +quit'], shell=True)
     return start_call.returncode
 
 
@@ -132,7 +132,3 @@ if server:
         status(server)
     elif function is 'update':
         update(server)
-    else:
-        print("Incorrect call to script. Please use control.py -h for usage information.")
-else:
-    print("Incorrect call to script. Please use control.py -h for usage information.")
