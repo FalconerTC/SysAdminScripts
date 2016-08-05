@@ -124,18 +124,18 @@ config.read('./settings/config.cfg')
 print("This is where the conditionals begin.")
 if server:
     if function is 'start':
-	print("Start call begins.")
+        print("Start call begins.")
         start(server)
     elif function is 'stop':
-	print("Stop call begins.")
+        print("Stop call begins.")
         stop(server)
     elif function is 'restart':
-	print("Restart call begins.")
+        print("Restart call begins.")
         restart(server)
     elif function is 'status':
-	print("Status call begins.")
+        print("Status call begins.")
         status(server)
     elif function is 'update':
-	print("Update call begins.")
+        print("Update call begins.")
         update(server)
 print("This is where the conditionals end.")
