@@ -19,7 +19,7 @@ def get_pid(which):
     # run(['ps fax | grep ' + screen_name + ' | grep SCREEN | awk \'{ print $1 } \''], shell=True)
     # This returns, as a byte string, the PID of SCREEN. It essentially mimics the functionality of the above line
     # but I'm not sure if it should be removed yet.
-    pid = check_output(['pidof', 'SCREEN'])
+    pid = check_output(['pidof', 'SCREEN']).decode("utf-8")  # decodes PID from byte string to string
     return pid
 
 
