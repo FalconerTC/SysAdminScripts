@@ -131,23 +131,32 @@ verbosity = args.verbose
 config = ConfigParser(interpolation=ExtendedInterpolation())
 config.read('./settings/config.cfg')
 
-if verbosity: print("Server value: " + server)
-if verbosity: print("Function value: " + function)
-if verbosity: print("This is where the conditionals begin.")
+if verbosity:
+    print("Server value: " + server)
+if verbosity:
+    print("Function value: " + function)
+if verbosity:
+    print("This is where the conditionals begin.")
 if server:
     if function == 'start':
-        if verbosity: print("Start call begins.")
+        if verbosity:
+            print("Start call begins.")
         start(server)
     elif function == 'stop':
-        if verbosity: print("Stop call begins.")
+        if verbosity:
+            print("Stop call begins.")
         stop(server)
     elif function == 'restart':
-        if verbosity: print("Restart call begins.")
+        if verbosity:
+            print("Restart call begins.")
         restart(server)
     elif function == 'status':
-        if verbosity: print("Status call begins.")
+        if verbosity:
+            print("Status call begins.")
         status(server)
     elif function == 'update':
-        if verbosity: print("Update call begins.")
+        if verbosity:
+            print("Update call begins.")
         update(server)
-if verbosity: print("This is where the conditionals end.")
+if verbosity:
+    print("This is where the conditionals end.")
