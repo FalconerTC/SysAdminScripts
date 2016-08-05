@@ -111,10 +111,10 @@ parser = argparse.ArgumentParser(prog="Server control program", description="Thi
                                  "available on this server.")
 
 
-parser.add_argument('server', choices=['killingfloor', 'starbound'], help="Which server program to run", required=True)
+parser.add_argument('server', choices=['killingfloor', 'starbound'], help="Which server program to run", required=False)
 parser.add_argument('function', choices=['start', 'stop', 'restart', 'status', 'update'], help="What function to "
                     "perform with specified server.",
-                    required=True)
+                    required=False)
 args = parser.parse_args()
 server = args.server
 function = args.function
@@ -122,13 +122,18 @@ function = args.function
 config = ConfigParser(interpolation=ExtendedInterpolation())
 config.read('./settings/config.cfg')
 
-if function is 'start':
-    start(server)
-elif function is 'stop':
-    stop(server)
-elif function is 'restart':
-    restart(server)
-elif function is 'status':
-    status(server)
-elif function is 'update':
-    update(server)
+if server:
+    if function is 'start':
+        start(server)
+    elif function is 'stop':
+        stop(server)
+    elif function is 'restart':
+        restart(server)
+    elif function is 'status':
+        status(server)
+    elif function is 'update':
+        update(server)
+    else:
+        print("Incorrect function call. Please use control.py -h for usage information.")
+else:
+    print("Incorrect function call. Please use control.py -h for usage information.")
