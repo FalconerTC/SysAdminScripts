@@ -21,10 +21,11 @@ def get_pid(which):
     # This returns, as a byte string, the PID of the process that has a command line section matching the screen_name.
     # It essentially mimics the functionality of the above line but I'm not sure if it should be removed yet.
     try:
-        pid = check_output(['pgrep', '-f', screen_name]).decode("utf-8").strip()
+        pid = check_output(['pgrep', '-f', screen_name])
         # decodes PID from byte string to string
     except CalledProcessError:
-        print("Could not find PID. Is the service running?")
+        if verbose:
+            print("Could not find PID. Is the service running?")
     return pid
 
 
@@ -87,7 +88,7 @@ def status(which):
     pid = get_pid(which)
     if pid:
         print("Server running.")
-        print("PID: " + str(pid))
+        print("PID: " + str(pid.decode('utf-8').strip()))
         return_code = 0
     else:
         print("Server not running.")
@@ -122,41 +123,41 @@ parser = argparse.ArgumentParser(prog="Server control program", description="Thi
 parser.add_argument('server', choices=['killingfloor', 'starbound'], help="Which server program to run")
 parser.add_argument('function', choices=['start', 'stop', 'restart', 'status', 'update'], help="What function to "
                     "perform with specified server.")
-parser.add_argument('-v', '--verbose', help="Verbosity.", required=False)
+parser.add_argument('-v', '--verbosity', help="Verbosity.", required=False)
 args = parser.parse_args()
 server = args.server
 function = args.function
-verbosity = args.verbose
+verbose = args.verbosity
 
 config = ConfigParser(interpolation=ExtendedInterpolation())
 config.read('./settings/config.cfg')
 
-if verbosity:
+if verbose:
     print("Server value: " + server)
-if verbosity:
+if verbose:
     print("Function value: " + function)
-if verbosity:
+if verbose:
     print("This is where the conditionals begin.")
 if server:
     if function == 'start':
-        if verbosity:
+        if verbose:
             print("Start call begins.")
         start(server)
     elif function == 'stop':
-        if verbosity:
+        if verbose:
             print("Stop call begins.")
         stop(server)
     elif function == 'restart':
-        if verbosity:
+        if verbose:
             print("Restart call begins.")
         restart(server)
     elif function == 'status':
-        if verbosity:
+        if verbose:
             print("Status call begins.")
         status(server)
     elif function == 'update':
-        if verbosity:
+        if verbose:
             print("Update call begins.")
         update(server)
-if verbosity:
+if verbose:
     print("This is where the conditionals end.")
