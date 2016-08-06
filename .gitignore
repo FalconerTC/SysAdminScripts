@@ -4,3 +4,5 @@
 
 # Python
 *.pyc
+*.xml
+.idea/SysAdminScripts.iml
