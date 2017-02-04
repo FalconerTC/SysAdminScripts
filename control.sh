@@ -10,7 +10,7 @@ get_pid()
 
 usage() 
 {
-    echo "Usage: $0 {killingfloor|starbound} {start|stop|restart|status|update}"
+    echo "Usage: $0 {killingfloor|starbound|ark} {start|stop|restart|status|update}"
     exit 0
 }
 
@@ -86,6 +86,9 @@ case "$1" in
     ;;
     starbound | sb)
         source $SETTINGS_DIR/.starboundrc
+    ;;
+    ark)
+        source $SETTINGS_DIR/.arkrc
     ;;
     *)
         usage

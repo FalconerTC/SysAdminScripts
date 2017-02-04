@@ -1,0 +1,9 @@
+# .arkrc: Settings for dedicated Ark Survival Evolved server
+
+GAME_DIR="$SERVERS_DIR/ark"
+GAME_PATH="$GAME_DIR/System"
+GAME_ID=376030
+SCREEN_NAME="Ark_Server"
+START_FLAGS="TheIsland?listen?SessionName=meme_trade?ServerPassword=nyanpasu?ServerAdminPassword=NYANPASU -server -log"
+START_CMD="$GAME_PATH/ShooterGameServer $START_FLAGS -server -log"
+STEAM_USERNAME="spig_server"
