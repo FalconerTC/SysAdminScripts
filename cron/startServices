@@ -19,7 +19,7 @@ sudo $TS3_DIR"/ts3server_startscript.sh" start
 #popd
 
 echo $CONTROL
-SERVICES=("starbound")
+SERVICES=("ark")
 for SERVICE in ${SERVICES[@]}; do
     echo "eval $CONTROL $SERVICE start"
     eval $CONTROL $SERVICE start   

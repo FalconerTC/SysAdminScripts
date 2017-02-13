@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ROUTE='Discovery'
+TOKEN='"routeID":11'
+while [ true ]; do
+    wget -q -O- "http://cherishapps.me:8080/buses" | grep -iq "$TOKEN"
+    if [ $? == 0 ]; then
+        echo "$(date "+%m-%d %X" -d "+1 hour"): $ROUTE showing"
+    else
+        echo "$(date "+%m-%d %X" -d "+1 hour"): $ROUTE not showing"
+    fi
+    sleep 30
+done
