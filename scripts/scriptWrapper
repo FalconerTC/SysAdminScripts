@@ -2,17 +2,24 @@
 # A wrapper for running scripts in ~/scripts/cron 
 # and logging to ~/log
 
+# Move to the script directory
+cd "$( dirname "${BASH_SOURCE[0]}" )"
+
 # Vars
-source /home/spig/scripts/settings/.allrc
-BASE_DIR="/home/spig/"
-LOG_DIR=$BASE_DIR"log/$1/$(date +%m)/$(date +%d)/"
-SCRIPTS_DIR=$BASE_DIR"scripts/cron/"
+BASE_DIR=$(dirname `pwd`)
+LOG_DIR="$BASE_DIR/log/$1/$(date +%m)/$(date +%d)"
+AVAILABLE_SCRIPTS="$BASE_DIR/scripts/cron/"
+
+echo $AVAILABLE_SCRIPTS
+
+# Source environment settings
+source "$BASE_DIR/scripts/settings/.allrc"
 
 # Parse args
 if [ "$#" -lt 1 ]; then
     echo "Usage: Scriptwrapper [script]"
-    echo "Known scripts: "
-    for file in $(ls $SCRIPTS_DIR); do
+    echo "Available scripts: "
+    for file in $(ls $AVAILABLE_SCRIPTS); do
         echo -e "\t$file"   
     done
     exit 0
@@ -23,13 +30,13 @@ shift
 
 # Setup logging
 mkdir -p $LOG_DIR
-log=$LOG_DIR"$(date +%H:%M:%S)"
+log="$LOG_DIR/$(date +%H:%M:%S)"
 
 # Validate and execute
-files=$(ls $SCRIPTS_DIR)
+files=$(ls $AVAILABLE_SCRIPTS)
 for file in $files; do
     if [ "$SCRIPT" == "$file" ]; then
-	eval "$SCRIPTS_DIR/$SCRIPT" $@ &>$log
+	eval "$AVAILABLE_SCRIPTS/$SCRIPT" $@ &>$log
 	exit 0
     fi
 done

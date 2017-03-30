@@ -6,3 +6,6 @@
 *.pyc
 *.xml
 .idea/SysAdminScripts.iml
+
+# Created
+log

@@ -7,8 +7,8 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Vars
-BASE_DIR="/home/spig/"
-TS3_DIR=$BASE_DIR"TS3Server/"
+BASE_DIR="/home/spig/scripts"
+TS3_DIR="$HOME_DIR/TS3Server/"
 
 function printNLR() {
 ANSI='\033[0;'
@@ -28,7 +28,7 @@ apt-get -yu upgrade
 
 # Notify services
 printNLR "Notifying TS33 server..."
-eval $BASE_DIR"scripts/ts3-sendmsg.py" 60 10 5 & >> /dev/null
+eval "$BASE_DIR/scripts/ts3-sendmsg.py" 60 10 5 & >> /dev/null
 #$USRDIR/scripts/MinecraftScript.sh restart
 
 # Wait
