@@ -10,26 +10,35 @@ fi
 BASE_DIR="/home/spig/"
 TS3_DIR=$BASE_DIR"TS3Server/"
 
+function printNLR() {
+ANSI='\033[0;'
+RED="${ANSI}31m"
+NC="${ANSI}0m"
+echo -e "${RED}$1${NC}\n"
+
+}
+
 # Update
-echo -e "Fetching updates..."
-apt-get -qq update 
-echo -e "Installing updates\n"
+printNLR "Fetching updates"
+apt -qq update 
+printNLR "Available updates"
+apt list --upgradable
+printNLR "Installing updates\n"
 apt-get -yu upgrade
-echo -e "Running TS3 notifier\n"
 
 # Notify services
-echo -e "Notifying teamspeak3 server..."
+printNLR "Notifying TS33 server..."
 #eval $BASE_DIR"scripts/ts3Notifier" 60 10 5 & >> /dev/null
 eval $BASE_DIR"scripts/ts3.py" 60 10 5 & >> /dev/null
 #$USRDIR/scripts/MinecraftScript.sh restart
 
 # Wait
-echo -e "Sleeping 60 seconds..."
+printNLR "Sleeping 60 seconds"
 sleep 60
 
 # Restart
-echo "Shutting down"
+printNLR "Shutting down"
 eval $TS3_DIR/ts3server_startscript.sh stop &
 wait
-echo "Update complete"
+printNLR "Update complete. Goodnight."
 sudo reboot
